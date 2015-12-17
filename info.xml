@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<extension key="com.backofficethinking.participantsmartgroup" type="module">
+  <file>participantsmartgroup</file>
+  <name>Participant Smart Group Creation</name>
+  <description>Create a Smart Group of registered participants on event creation.</description>
+  <license>AGPL-3.0</license>
+  <maintainer>
+    <author>BackOffice Thinking LLC</author>
+    <email>info@backofficethinking.com</email>
+  </maintainer>
+  <urls>
+    <url desc="Main Extension Page">https://github.com/backofficethinking/com.backofficethinking.participantsmartgroup/README.md</url>
+    <url desc="Documentation">https://github.com/backofficethinking/com.backofficethinking.participantsmartgroup/README.md</url>
+    <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
+  </urls>
+  <releaseDate>2015-12-18</releaseDate>
+  <version>1.0.0</version>
+  <develStage></develStage>
+  <compatibility>
+    <ver>4.6</ver>
+  </compatibility>
+  <comments>Developed by BackOffice Thinking LLC. This extension was created for and sponsored by Keiretsu Forum Mid-Atlantic (http://www.keiretsuforum-midatlantic.com/).</comments>
+  <civix>
+    <namespace>CRM/Participantsmartgroup</namespace>
+  </civix>
+</extension>
