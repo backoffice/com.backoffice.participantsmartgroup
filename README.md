@@ -6,7 +6,7 @@ This CiviCRM extension automatically creates a Smart Group of Registered Partici
 
 ## How to Install
 
-1. Download extension from https://github.com/backofficethinking/com.backofficethinking.participantsmartgroup/releases/latest.
+1. Download extension from https://github.com/backoffice/com.backofficethinking.participantsmartgroup/releases/latest.
 2. Unzip / untar the package and place it in your configured extensions directory.
 3. When you reload the Manage Extensions page the new “Participant Smart Group Creation” extension should be listed with an Install link.
 4. Proceed with install.
