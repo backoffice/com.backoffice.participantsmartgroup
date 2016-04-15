@@ -1,5 +1,5 @@
 Package: com.backofficethinking.participantsmartgroup
-Copyright (C) 2015, BackOffice Thinking LLC
+Copyright (C) 2015, Backoffice Thinking <backofficethinking@info.com>
 Licensed under the GNU Affero Public License 3.0 (below).
 
 -------------------------------------------------------------------------------

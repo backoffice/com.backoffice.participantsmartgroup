@@ -1,0 +1,10 @@
+{* Adding help text to create smart group checkbox *}
+
+{htxt id="id-create_smartgroup-title"}
+  {ts}Registered Participant Smart Group{/ts}
+{/htxt}
+{htxt id="id-create_smartgroup"}
+<p>{ts}When enabled, Registered Participant Smart Group will be created for the event.{/ts}</p>
+{/htxt}
+
+{* Adding Ends *}			

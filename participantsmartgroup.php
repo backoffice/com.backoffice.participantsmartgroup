@@ -126,20 +126,17 @@ function participantsmartgroup_civicrm_alterSettingsFolders(&$metaDataFolders = 
 /**
  * Implements hook_civicrm_post().
  *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_post
  *
  **/
 function participantsmartgroup_civicrm_post( $op, $objectName, $objectId, &$objectRef ) {
 
   if($objectName == 'Event' && $op == 'create') {
-
-    //Checking 'Smart Group Creation' variable set in session
-    $session = CRM_Core_Session::singleton();
-    if(!$session->get('createSmartgroup')) {
+    $smarty =  CRM_Core_Smarty::singleton( );
+    $values = $smarty->get_template_vars( );
+    if(!isset($values['create_smartgroup']) || !$values['create_smartgroup']) {
       return;
     }
-
-    $session->set('createSmartgroup', FALSE);
 
     //Creating Smart Group with the help of Saved Search API
     $smartGroupName  = str_replace(' ', '_', $objectRef->title)."-Registrants";
@@ -147,11 +144,11 @@ function participantsmartgroup_civicrm_post( $op, $objectName, $objectId, &$obje
 
     $grpExists = civicrm_api('Group', 'get', array('version' => 3,'name' => $smartGroupName));
 
-    if($grpExists['count'] > 0) {
-      $uniqid = uniqid();
-      $smartGroupName  = str_replace(' ', '_', $objectRef->title)."-Registrants_".$uniqid;
-      $smartGroupTitle = $objectRef->title." Registrants_".$uniqid;
-    }
+      if($grpExists['count'] > 0) {
+        $smartGroupName  = str_replace(' ', '_', $objectRef->title)."-Registrants_".uniqid();
+        $smartGroupTitle = $objectRef->title." Registrants_".uniqid();
+        $session->setStatus("Smart group created with name : {$smartGroupTitle}",'Registered Smart Group','info');
+      }
 
     $params = array(
       'form_values' => array(
@@ -175,8 +172,6 @@ function participantsmartgroup_civicrm_post( $op, $objectName, $objectId, &$obje
 
     //Creating Participant 'Saved Search' and creating 'Smart Group' for event
     civicrm_api3('SavedSearch', 'create', $params);
-    $session->setStatus("Smart group created with name : {$smartGroupName}",'Registered Smart Group','info');
-
   }
 }
 
@@ -203,12 +198,12 @@ function participantsmartgroup_civicrm_buildForm($formName, &$form) {
  **/
 function participantsmartgroup_civicrm_pre($op, $objectName, $id, &$params) {
 
+  //Adding smart group create variable in smarty scope.
   if($objectName == 'Event' && $op == 'create') {
-    $session = CRM_Core_Session::singleton();
-    if(isset($params['create_smartgroup'])) {
-      $session->set('createSmartgroup', TRUE);  //Setting 'create_smartgroup' session variable to TRUE
-    }else {
-      $session->set('createSmartgroup', FALSE); //Reset Scope of 'create_smartgroup' session variable to FALSE
+    if(isset($params['create_smartgroup']) && $params['create_smartgroup']) {
+      $smarty =  CRM_Core_Smarty::singleton( );
+      $smarty->pushScope(array('create_smartgroup' => TRUE));
     }
   }
 }
+
